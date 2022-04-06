@@ -2,3 +2,6 @@ pour créer une branche:
 
 git checkout -b <nom_branche>
 git branch --set-upstream-to=origin/main <nom_branche>
+
+Pour lancer la classe principale :
+mvn exec:java -Dexec.mainClass="Dataframe"
