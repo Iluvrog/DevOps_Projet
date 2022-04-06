@@ -26,3 +26,5 @@ hs_err_pid*
 /dataframe/target/surefire-reports/
 **/dataframe/target/surefire-reports
 **/surefire-reports
+DataframeTest.txt
+TEST-DataframeTest.xml
