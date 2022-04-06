@@ -25,3 +25,4 @@ hs_err_pid*
 #Pas de maven info
 /dataframe/target/surefire-reports/
 **/dataframe/target/surefire-reports
+**/surefire-reports
