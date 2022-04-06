@@ -30,3 +30,5 @@ DataframeTest.txt
 TEST-DataframeTest.xml
 /dataframe/target/surefire-reports/DataframeTest.txt
 /dataframe/target/surefire-reports/TEST-DataframeTest.xml
+*Test.txt
+*TEST-*.xml
