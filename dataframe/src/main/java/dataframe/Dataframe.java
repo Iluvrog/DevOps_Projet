@@ -61,6 +61,11 @@ public class Dataframe {
 		}
 	}
 	
+	private Dataframe(){
+		colonnes = new Colonne[0];
+		nb_lignes = 0;
+	}
+	
 	private int maxStringSize(){
 		int m = -1;
 		int m2;
@@ -146,7 +151,7 @@ public class Dataframe {
 	public Dataframe selectLabels(String... labels) throws DimensionError{
 		Dataframe copie = null;
 		
-		copie = new Dataframe(new String[]{"nothing"} ,(Object[]) new Integer[]{0});
+		copie = new Dataframe();
 		copie.nb_lignes = nb_lignes;
 	
 		copie.colonnes = new Colonne[labels.length];
