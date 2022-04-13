@@ -1,5 +1,3 @@
-package dataframe;
-
 public class Colonne<E>{
 
 	private E[] datas;
