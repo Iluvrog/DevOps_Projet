@@ -1,2 +1,4 @@
 dataframe/IndexError.class
+dataframe/DimensionError.class
 dataframe/Dataframe.class
+dataframe/Colonne.class
