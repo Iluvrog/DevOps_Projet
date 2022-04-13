@@ -167,11 +167,13 @@ public class Dataframe {
 		
 	}
 	
-	private boolean isinLabels(String[] labels, String test){
-		for (String l : labels)
-			if (l.equals(test)) return true;
-			
-		return false;
+	private int isinLabels(Colonne[] labels, String test){
+		String l;
+		for (int i = 0; i<labels.length; i++){
+			l = labels[i].getLabel();
+			if (l.equals(test)) return i;
+		}
+		return -1;
 	}
 	
 	public Dataframe selectLabels(String... labels) throws DimensionError{
@@ -182,10 +184,13 @@ public class Dataframe {
 	
 		copie.colonnes = new Colonne[labels.length];
 		int index = 0;
+		
+		int res;
 			
-		for (int i = 0; i < colonnes.length; i++){
-			if (isinLabels(labels, colonnes[i].getLabel())){
-				copie.colonnes[index] = colonnes[i].clone();
+		for (int i = 0; i < labels.length; i++){
+			res = isinLabels(colonnes, labels[i]);
+			if ( res >= 0){
+				copie.colonnes[index] = colonnes[res].clone();
 				index++;
 			}
 		}
@@ -206,7 +211,7 @@ public class Dataframe {
 		d.print();
 		System.out.println("\n\n");
 		try{
-			d.selectLabels("name").print();
+			d.selectLabels("name", "n").print();
 		} catch(Exception ignored){}
 	}
 }
