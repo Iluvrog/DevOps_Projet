@@ -4,7 +4,7 @@ git checkout -b <nom_branche>
 git branch --set-upstream-to=origin/main <nom_branche>
 
 Pour lancer la classe principale :
-mvn exec:java -Dexec.mainClass="Dataframe"
+mvn exec:java -Dexec.mainClass="Dataframe" -Dexec.args="args0 args1"
 
 Passer jdk dans une ancienne version :
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
