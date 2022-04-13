@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-dataframe/DimensionError.class
-dataframe/IndexError.class
-dataframe/Dataframe.class
-dataframe/Colonne.class
-=======
 IndexError.class
 Dataframe.class
 DimensionError.class
 Colonne.class
->>>>>>> 93caacd5e98e08479c4bb66ff6dd9c64a3dbf822

@@ -143,26 +143,22 @@ public class Dataframe {
 		return false;
 	}
 	
-	public Dataframe selectLabels(String... labels) throws IndexError{
+	public Dataframe selectLabels(String... labels) throws DimensionError{
 		Dataframe copie = null;
 		
-		try{
-			copie = (Dataframe) this.clone();
+		copie = new Dataframe(new String[]{"nothing"} ,(Object[]) new Integer[]{0});
+		copie.nb_lignes = nb_lignes;
 	
-			copie.colonnes = new Colonne[labels.length];
-			int index = 0;
+		copie.colonnes = new Colonne[labels.length];
+		int index = 0;
 			
-			for (int i = 0; i < colonnes.length; i++){
-				if (isinLabels(labels, colonnes[i].getLabel())){
-					copie.colonnes[index] = colonnes[i].clone();
-					index++;
-				}
+		for (int i = 0; i < colonnes.length; i++){
+			if (isinLabels(labels, colonnes[i].getLabel())){
+				copie.colonnes[index] = colonnes[i].clone();
+				index++;
 			}
-		
-		} catch(CloneNotSupportedException cnse) {
-			cnse.printStackTrace(System.err);
 		}
-		
+
 		return copie;
 	}
 	
@@ -173,5 +169,9 @@ public class Dataframe {
 	public static void main(String[] args) throws DimensionError{
 		Dataframe d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
 		d.print();
+		System.out.println("\n\n");
+		try{
+			d.selectLabels("name").print();
+		} catch(Exception ignored){}
 	}
 }
