@@ -7,9 +7,7 @@ on: [push]
 
 jobs:
   build_and_test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -18,5 +16,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build and Test with Maven
       run: mvn -B package --file dataframe/pom.xml
+    - name: Codecov coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: '*jacoco.xml'
