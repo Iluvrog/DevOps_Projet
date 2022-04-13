@@ -136,8 +136,34 @@ public class Dataframe {
 		
 	}
 	
+	private boolean isinLabels(String[] labels, String test){
+		for (String l : labels)
+			if (l.equals(test)) return true;
+			
+		return false;
+	}
+	
 	public Dataframe selectLabels(String... labels) throws IndexError{
-		return null;
+		Dataframe copie = null;
+		
+		try{
+			copie = (Dataframe) this.clone();
+	
+			copie.colonnes = new Colonne[labels.length];
+			int index = 0;
+			
+			for (int i = 0; i < colonnes.length; i++){
+				if (isinLabels(labels, colonnes[i].getLabel())){
+					copie.colonnes[index] = colonnes[i].clone();
+					index++;
+				}
+			}
+		
+		} catch(CloneNotSupportedException cnse) {
+			cnse.printStackTrace(System.err);
+		}
+		
+		return copie;
 	}
 	
 	public Dataframe selectLignes(int... indexs) throws IndexError{
