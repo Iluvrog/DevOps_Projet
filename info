@@ -4,6 +4,7 @@ pour créer une branche (depuis DevOps_projet/):
 
 Pour lancer la classe principale (depuis DevOps_projet/dataframe/):
 mvn exec:java -Dexec.mainClass="Dataframe"
+ou mvn exec:java -Dexec.mainClass="Dataframe" -Dexec.args="args0 args1"
 
 Passer jdk dans une ancienne version :
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/

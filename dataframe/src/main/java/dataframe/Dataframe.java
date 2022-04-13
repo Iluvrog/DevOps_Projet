@@ -32,25 +32,29 @@ public class Dataframe {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String line = "";
 			String splitBy = ",";
-			String[] labels = null;
-			int nb_collones = 0;
 			int n = -1;
 			while ((line = br.readLine()) != null){
 				String[] str = line.split(splitBy);
 				if(n == -1){
-					nb_collones = str.length;
-					colonnes = new Colonne[nb_collones];
-					labels = str;
-				}else{
-					if(n == 0)
+					String[] label = str;
+					colonnes = new Colonne[label.length];
+					if((line = br.readLine()) == null){
+						nb_lignes = 0;
+					}else{
+						str = line.split(splitBy);
 						nb_lignes = str.length;
-					else if(str.length != nb_lignes)
-						throw new DimensionError();
-					Colonne c = new Colonne(nb_lignes, labels[n]);
-					for(int j = 0; j < nb_lignes ; j++){
-						c.add(j,str[j]);
 					}
-					colonnes[n] = c;
+					for(int i = 0; i < label.length ; i++){
+						colonnes[i] = new Colonne(nb_lignes, label[i]);
+					}
+					n = 0;
+				}
+				if(n == 0)
+					nb_lignes = str.length;
+				else if(str.length != nb_lignes)
+					throw new DimensionError();
+				for(int j = 0; j < nb_lignes ; j++){
+					colonnes[j].add(n,type(str[j]));
 				}
 				n++;
 			}
@@ -61,6 +65,28 @@ public class Dataframe {
 		}
 	}
 	
+	public Object type(String arg){
+		int entier = 0;
+		int i = 0;
+		while(i != arg.length()){
+			char a = arg.charAt(i);
+			if(a == '.'){
+				entier++;
+			}
+			else if (a > 39 || a < 30){ //string
+				return arg;
+			}
+			i++;
+		}
+		if(entier == 0){
+			return Integer.parseInt(arg);
+		}else if(entier == 1){
+			return Double.parseDouble(arg);
+		}else{
+			return arg;
+		}
+  }
+  
 	private Dataframe(){
 		colonnes = new Colonne[0];
 		nb_lignes = 0;
@@ -172,7 +198,11 @@ public class Dataframe {
 	}
 	
 	public static void main(String[] args) throws DimensionError{
-		Dataframe d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
+		Dataframe d;
+		if(args.length == 0)
+			d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
+		else
+			d = new Dataframe(args[0]);
 		d.print();
 		System.out.println("\n\n");
 		try{
