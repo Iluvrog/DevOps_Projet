@@ -18,24 +18,18 @@ jobs:
         cache: maven
     - name: Build and Test with Maven
       run: mvn -B package --file dataframe/pom.xml
-    
-  coverage_test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-     - name: Generate JaCoCo Badge for Chroma League
-        id: jacoco-chromaleague
-        uses: cicirello/jacoco-badge-generator@v2
-        with:
-          generate-branches-badge: false
-          jacoco-csv-file: chroma-league/target/site/jacoco/jacoco.csv
-          coverage-badge-filename: jacoco-chromaleague.svg
-
-      - name: Log coverage percentage
-        run: |
+    - name: Generate JaCoCo Badge for Chroma League
+      id: jacoco-chromaleague
+      uses: cicirello/jacoco-badge-generator@v2
+      with:
+        generate-branches-badge: false
+        jacoco-csv-file: chroma-league/target/site/jacoco/jacoco.csv
+        coverage-badge-filename: jacoco-chromaleague.svg
+    - name: Log coverage percentage
+      run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
-      - name: Commit the badge (if it changed)
-        run: |
+    - name: Commit the badge (if it changed)
+      run: |
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'bonepl'
             git config --global user.email 'bonepl@users.noreply.github.com'
