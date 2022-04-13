@@ -1,4 +1,4 @@
-dataframe/IndexError.class
-dataframe/DimensionError.class
-dataframe/Dataframe.class
-dataframe/Colonne.class
+IndexError.class
+Dataframe.class
+DimensionError.class
+Colonne.class

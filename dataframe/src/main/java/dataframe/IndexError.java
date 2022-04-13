@@ -1,5 +1,3 @@
-package dataframe;
-
 public class IndexError extends Exception {
 	public IndexError(){
 		super();
