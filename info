@@ -1,9 +1,8 @@
-pour créer une branche:
+pour créer une branche (depuis DevOps_projet/):
 
-git checkout -b <nom_branche>
-git branch --set-upstream-to=origin/main <nom_branche>
+./creer_branch.sh <nom_branche>
 
-Pour lancer la classe principale :
+Pour lancer la classe principale (depuis DevOps_projet/dataframe/):
 mvn exec:java -Dexec.mainClass="Dataframe"
 
 Passer jdk dans une ancienne version :
