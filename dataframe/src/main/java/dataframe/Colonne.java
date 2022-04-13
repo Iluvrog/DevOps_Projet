@@ -19,4 +19,12 @@ public class Colonne<E>{
 	public String getLabel(){
 		return label;
 	}
+	
+	public Colonne clone(){
+		Colonne copie = new Colonne(datas.length, label);
+		for (int i = 0; i < datas.length; i++) {
+			copie.add(i, get(i));
+		}
+		return copie;
+	}
 }

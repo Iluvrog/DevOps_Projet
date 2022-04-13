@@ -85,6 +85,11 @@ public class Dataframe {
 		}else{
 			return arg;
 		}
+  }
+  
+	private Dataframe(){
+		colonnes = new Colonne[0];
+		nb_lignes = 0;
 	}
 	
 	private int maxStringSize(){
@@ -162,8 +167,30 @@ public class Dataframe {
 		
 	}
 	
-	public Dataframe selectLabels(String... labels) throws IndexError{
-		return null;
+	private boolean isinLabels(String[] labels, String test){
+		for (String l : labels)
+			if (l.equals(test)) return true;
+			
+		return false;
+	}
+	
+	public Dataframe selectLabels(String... labels) throws DimensionError{
+		Dataframe copie = null;
+		
+		copie = new Dataframe();
+		copie.nb_lignes = nb_lignes;
+	
+		copie.colonnes = new Colonne[labels.length];
+		int index = 0;
+			
+		for (int i = 0; i < colonnes.length; i++){
+			if (isinLabels(labels, colonnes[i].getLabel())){
+				copie.colonnes[index] = colonnes[i].clone();
+				index++;
+			}
+		}
+
+		return copie;
 	}
 	
 	public Dataframe selectLignes(int... indexs) throws IndexError{
@@ -177,5 +204,9 @@ public class Dataframe {
 		else
 			d = new Dataframe(args[0]);
 		d.print();
+		System.out.println("\n\n");
+		try{
+			d.selectLabels("name").print();
+		} catch(Exception ignored){}
 	}
 }
