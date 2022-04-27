@@ -230,6 +230,17 @@ public class Dataframe {
 
 		return copie;
 	}
+
+	public float moyenne(String label)throws DimensionError{
+		Dataframe copie = selectLabels(label);
+		float somme = 0;
+		int nb = 0;
+		for (int i = 0; i<nb_lignes; i++){
+			somme += (float)(Integer)(copie.colonnes[0].get(i));
+			nb++;
+		}
+		return somme/nb;
+	}
 	
 	public static void main(String[] args) throws DimensionError{
 		Dataframe d;
@@ -245,8 +256,9 @@ public class Dataframe {
 		System.out.println("\n\n");
 		try {
 			d.selectLignes(3,2).print();
-		} catch(Exception ignored){
-			System.out.println(ignored);
-		}
+		} catch(Exception ignored){}
+		try{
+			System.out.println("\n\n\nmoyenne test : " + d.moyenne("n"));
+		}catch(Exception ignored){System.out.println(ignored);}
 	}
 }
