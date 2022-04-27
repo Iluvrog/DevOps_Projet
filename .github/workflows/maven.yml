@@ -28,11 +28,11 @@ jobs:
       with:
         jacoco-csv-file: dataframe/target/site/jacoco/jacoco.csv
     - name: Log coverage percentage
-        run: |
+      run: |
                 echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
                 echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
     - name: Commit the badge (if it changed)
-        run: |
+      run: |
           if [[ `git status --porcelain` ]]; then
                   git config --global user.name 'LAFFONT, LACOTTE'
                   git add -A
@@ -40,7 +40,7 @@ jobs:
                   git push
           fi
     - name: Upload JaCoCo coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-report
-          path: reports/jacoco/
+      uses: actions/upload-artifact@v2
+      with:
+        name: jacoco-report
+        path: reports/jacoco/
