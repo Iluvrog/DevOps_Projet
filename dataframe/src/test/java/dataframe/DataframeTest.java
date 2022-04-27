@@ -125,4 +125,105 @@ public class DataframeTest {
 			Dataframe d2 = d.selectLignes(5);
 	    });
 	}
+	
+	@Test
+	@DisplayName("test selection colonnes invalide")
+	public void testSelectionColonnesNonValide() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(NotFuond.class, () -> {
+			Dataframe d2 = d.selectLabels("nom","poids", "errggtb");
+	    });
+	}
+	
+	@Test
+	@DisplayName("test moyenne entier")
+	public void testmoyenne() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 11.0, d.moyenne("numero"));
+	}
+	
+	@Test
+	@DisplayName("test moyenne reel")
+	public void testmoyenneDouble() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 2.0, d.moyenne("poids"));
+	}
+	
+	@Test
+	@DisplayName("test moyenne sur string")
+	public void testmoyenneString() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(NonNumberException.class, () -> {
+			double res = d.moyenne("nom");
+	    });
+	}
+	
+	@Test
+	@DisplayName("test somme entier")
+	public void testsomme() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 55.0, d.somme("numero"));
+	}
+	
+	@Test
+	@DisplayName("test somme reel")
+	public void testsommeDouble() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 10.0, d.somme("poids"));
+	}
+	
+	@Test
+	@DisplayName("test somme sur string")
+	public void testsommeString() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(NonNumberException.class, () -> {
+			double res = d.somme("nom");
+	    });
+	}
+	
+	@Test
+	@DisplayName("test min entier")
+	public void testmin() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 1.0, d.min("numero"));
+	}
+	
+	@Test
+	@DisplayName("test min reel")
+	public void testminDouble() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 0.0, d.min("poids"));
+	}
+	
+	@Test
+	@DisplayName("test min sur string")
+	public void testminString() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(NonNumberException.class, () -> {
+			double res = d.min("nom");
+	    });
+	}
+	
+	@Test
+	@DisplayName("test max entier")
+	public void testmax() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 15.0, d.max("numero"));
+	}
+	
+	@Test
+	@DisplayName("test max reel")
+	public void testmaxDouble() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{0.5,1.5,2.5,5.5,0.0} );
+		assertEquals( 5.5, d.max("poids"));
+	}
+	
+	@Test
+	@DisplayName("test max sur string")
+	public void testmaxString() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(NonNumberException.class, () -> {
+			double res = d.max("nom");
+	    });
+	}
 }

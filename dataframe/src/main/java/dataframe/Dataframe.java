@@ -198,7 +198,7 @@ public class Dataframe {
 		return -1;
 	}
 	
-	public Dataframe selectLabels(String... labels) throws DimensionError{
+	public Dataframe selectLabels(String... labels) throws Exception{
 		Dataframe copie = null;
 		
 		copie = new Dataframe();
@@ -214,6 +214,8 @@ public class Dataframe {
 			if ( res >= 0){
 				copie.colonnes[index] = colonnes[res].clone();
 				index++;
+			}else{
+				throw new NotFuond();
 			}
 		}
 
@@ -240,18 +242,71 @@ public class Dataframe {
 		return copie;
 	}
 
-	public float moyenne(String label)throws DimensionError{
+	public double moyenne(String label)throws Exception{
 		Dataframe copie = selectLabels(label);
-		float somme = 0;
+		if(nb_lignes != 0 && copie.colonnes[0].get(0).getClass().getName().equals("java.lang.String")) throw new NonNumberException();
+
+		double somme = 0;
 		int nb = 0;
 		for (int i = 0; i<nb_lignes; i++){
-			somme += (float)(Integer)(copie.colonnes[0].get(i));
+			if(copie.colonnes[0].get(0).getClass().getName().equals("java.lang.Integer"))
+				somme += (Integer)(copie.colonnes[0].get(i));
+			else
+				somme += (Double)(copie.colonnes[0].get(i));
 			nb++;
 		}
 		return somme/nb;
 	}
 	
-	public static void main(String[] args) throws DimensionError, IOException{
+	public double somme(String label)throws Exception{
+		Dataframe copie = selectLabels(label);
+		if(nb_lignes != 0 && copie.colonnes[0].get(0).getClass().getName().equals("java.lang.String")) throw new NonNumberException();
+
+		double somme = 0;
+		for (int i = 0; i<nb_lignes; i++){
+			if(copie.colonnes[0].get(0).getClass().getName().equals("java.lang.Integer"))
+				somme += (Integer)(copie.colonnes[0].get(i));
+			else
+				somme += (Double)(copie.colonnes[0].get(i));
+		}
+		return somme;
+	}
+	
+	public double min(String label)throws Exception{
+		Dataframe copie = selectLabels(label);
+		if(nb_lignes != 0 && copie.colonnes[0].get(0).getClass().getName().equals("java.lang.String")) throw new NonNumberException();
+
+		double min = 9999999;
+
+		for (int i = 0; i<nb_lignes; i++){
+			double cc;
+			if(copie.colonnes[0].get(0).getClass().getName().equals("java.lang.Integer"))
+				cc = (Integer)(copie.colonnes[0].get(i));
+			else
+				cc = (Double)(copie.colonnes[0].get(i));
+			if(cc < min) min = cc;
+		}
+		return min;
+	}
+	
+	public double max(String label)throws Exception{
+		Dataframe copie = selectLabels(label);
+		if(nb_lignes != 0 && copie.colonnes[0].get(0).getClass().getName().equals("java.lang.String")) throw new NonNumberException();
+
+		double max = -9999999;
+		
+		for (int i = 0; i<nb_lignes; i++){
+			double cc;
+			if(copie.colonnes[0].get(0).getClass().getName().equals("java.lang.Integer"))
+				cc = (Integer)(copie.colonnes[0].get(i));
+			else
+				cc = (Double)(copie.colonnes[0].get(i));
+			if(cc > max) max = cc;
+		}
+		return max;
+	}
+	
+	public static void main(String[] args) throws Exception{
 		Dataframe d;
 		if(args.length == 0)
 			d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
