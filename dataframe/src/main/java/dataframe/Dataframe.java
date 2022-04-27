@@ -221,18 +221,36 @@ public class Dataframe {
 	}
 	
 	public Dataframe selectLignes(int... indexs) throws IndexError{
-		return null;
+		Dataframe copie = null;
+		copie = new Dataframe();
+		copie.colonnes = new Colonne[colonnes.length];
+		copie.nb_lignes = indexs.length;
+
+		for (int i=0; i<colonnes.length; i++){
+			copie.colonnes[i] = new Colonne(indexs.length, colonnes[i].getLabel());
+		}
+
+		for (int i=0; i<indexs.length; i++){
+			for (int j=0; j<colonnes.length; j++){
+				copie.colonnes[j].add(i, colonnes[j].get(indexs[i]));
+			}
+		}
+
+		return copie;
 	}
 	
 	/*public static void main(String[] args) throws DimensionError{
-		Dataframe d;
-		if(args.length == 0)
-			d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
-		else
-			d = new Dataframe(args[0]);
-			System.out.println(d.print());
-		try{
-			//d.selectLabels("name", "n").print();
-		} catch(Exception ignored){}
-	}*/
+      Dataframe d;
+      if(args.length == 0)
+        d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
+      else
+        d = new Dataframe(args[0]);
+        System.out.println(d.print());
+      System.out.println("\n\n");
+      try {
+        d.selectLignes(3,2).print();
+      } catch(Exception ignored){
+        System.out.println(ignored);
+      } 
+    }*/
 }
