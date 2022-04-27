@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="DataframeTest" time="0.068" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="DataframeTest" time="0.045" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="strip"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -60,15 +60,15 @@
     <property name="java.vendor.version" value="Temurin-11.0.14.1+1"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionLignesCSV" time="0.054"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testnbdecolonnesCSV" time="0.011"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionColonne" time="0.033"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testnbdelignes0CSV" time="0.006"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionColonneCSV" time="0.002"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionLignesCSV" time="0.001"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testnbdecolonnesCSV" time="0.003"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testIOException" time="0"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testnbdelignes" time="0"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testnbdecolonnes" time="0"/>
   <testcase classname="DataframeTest" name="DataframeTest.testnbdecolonnes0" time="0"/>
   <testcase classname="DataframeTest" name="DataframeTest.testnbdelignes0" time="0"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testnbdelignes" time="0"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testIOException" time="0.001"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testnbdecolonnes" time="0.001"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionColonne" time="0"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testnbdelignes0CSV" time="0"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionLignes" time="0.001"/>
-  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionColonneCSV" time="0"/>
+  <testcase classname="DataframeTest" name="DataframeTest.testErrorDimensionLignes" time="0"/>
 </testsuite>
