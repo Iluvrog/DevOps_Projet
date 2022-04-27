@@ -90,10 +90,39 @@ public class DataframeTest {
 		assertEquals( 0, data.nbColonnes());
 	}
 	
-	/*@Test
-	@DisplayName("test affichage:")
-	public void testaffichage() throws Exception{
-		Dataframe data_small = new Dataframe( new String[]{"numero","nom"} ,(Object[]) new Integer[]{12,15} ,(Object[]) new String[]{"chien","chat"});
-		assertEquals( 3, data.nbColonnes());
-	}*/
+	@Test
+	@DisplayName("test selection colonnes")
+	public void testSelectionColonnes() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		Dataframe d2 = d.selectLabels("nom","poids");
+		assertEquals( 2, d2.nbColonnes());
+		assertEquals( 5, d2.nbLignes());
+	}
+	
+	@Test
+	@DisplayName("test selection lignes")
+	public void testSelectionlignes() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		Dataframe d2 = d.selectLignes(0,2);
+		assertEquals( 3, d2.nbColonnes());
+		assertEquals( 2, d2.nbLignes());
+	}
+	
+	@Test
+	@DisplayName("test selection lignes index invalide")
+	public void testSelectionErrorIndex1() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(IndexError.class, () -> {
+			Dataframe d2 = d.selectLignes(-1);
+	    });
+	}
+	
+	@Test
+	@DisplayName("test selection lignes index invalide")
+	public void testSelectionErrorIndex2() throws Exception{
+		Dataframe d = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
+		assertThrows(IndexError.class, () -> {
+			Dataframe d2 = d.selectLignes(5);
+	    });
+	}
 }

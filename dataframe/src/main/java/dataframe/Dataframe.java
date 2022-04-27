@@ -231,6 +231,7 @@ public class Dataframe {
 		}
 
 		for (int i=0; i<indexs.length; i++){
+			if(nb_lignes == 0 || indexs[i] < 0 || indexs[i] >= nb_lignes) throw new IndexError();
 			for (int j=0; j<colonnes.length; j++){
 				copie.colonnes[j].add(i, colonnes[j].get(indexs[i]));
 			}
@@ -270,18 +271,4 @@ public class Dataframe {
 			System.out.println("moyenne test : " + d.moyenne("n"));
 		}catch(Exception ignored){System.out.println(ignored);}
 	}
-	/*public static void main(String[] args) throws DimensionError{
-      Dataframe d;
-      if(args.length == 0)
-        d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
-      else
-        d = new Dataframe(args[0]);
-        System.out.println(d.print());
-      System.out.println("\n\n");
-      try {
-        d.selectLignes(3,2).print();
-      } catch(Exception ignored){
-        System.out.println(ignored);
-      } 
-    }*/
 }
