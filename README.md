@@ -20,6 +20,11 @@ Workflow :
 
     à compléter
 
+Pull request :
+
+    Nous avons mis en place un système de pull request assez simple,
+    dès qu'une demande était faite de merge, si les tests du workflow était bon, il devenait possible de merge et ce même pour le créateur de la pull request.
+
 Feedback :
 
     Personnelement, je trouve que git, malgré ses avantages, restent parfois flou et source d'erreur si utilisé sous forme de ligne de commande, cependant, il n'a pas ses problèmes utilisé avec un IDE
