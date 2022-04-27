@@ -22,11 +22,12 @@ public class Dataframe {
 				}
 				colonnes[i] = c;
 			}
+		}else{
+			colonnes = new Colonne[0];
 		}
 	}
 	
-	public Dataframe(String file) throws DimensionError{
-		try {
+	public Dataframe(String file) throws DimensionError,IOException{
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String line = "";
 			String splitBy = ",";
@@ -52,10 +53,7 @@ public class Dataframe {
 					n++;
 				}
 			}
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
+			if(colonnes == null) colonnes = new Colonne[0];
 	}
 	
 	public static int countLinesOld(String filename) throws IOException {
@@ -79,6 +77,14 @@ public class Dataframe {
 		}
 	}
 	
+	public int nbLignes(){
+		return nb_lignes;
+	}
+	
+	public int nbColonnes(){
+		return colonnes.length;
+	}
+	
 	public Object type(String arg){
 		int entier = 0;
 		int i = 0;
@@ -99,7 +105,7 @@ public class Dataframe {
 		}else{
 			return arg;
 		}
-  }
+  	}
   
 	private Dataframe(){
 		colonnes = new Colonne[0];
@@ -123,62 +129,64 @@ public class Dataframe {
 		return m;
 	}
 	
-	public void print(){
+	public String print(){
 	
-		printFirstLignes(nb_lignes);
+		return printFirstLignes(nb_lignes);
 	
 	}
 	
-	public void printFirstLignes(int n){
+	public String printFirstLignes(int n){
+		String s = ""; 
 	
-		if ( n > nb_lignes) n = nb_lignes;
+		if ( n >= nb_lignes) n = nb_lignes;
 		
 		int M = maxStringSize();
 	
 		int nb_colonnes = colonnes.length;
-		System.out.print("\t");
+		s+= "\t";
 		
 		for (int i = 0; i < nb_colonnes; i++){
-			System.out.print(colonnes[i].getLabel());
-			for (int k = 0; k < M - colonnes[i].getLabel().length() + 3; k++) System.out.print(" ");
+			s += colonnes[i].getLabel();
+			for (int k = 0; k < M - colonnes[i].getLabel().length() + 3; k++) s+=" ";
 		}
-		System.out.println();
+		s+="\n";
 		for (int i = 0; i < n; i++){
-			System.out.print(i+"\t");
+			s += i+"\t";
 			for (int j = 0; j < nb_colonnes; j++){
-				System.out.print(colonnes[j].get(i));
-				for (int k = 0; k < M - colonnes[j].get(i).toString().length() + 3; k++) System.out.print(" ");
+				s += colonnes[j].get(i);
+				for (int k = 0; k < M - colonnes[j].get(i).toString().length() + 3; k++) s+=" ";
 			}
-			System.out.println("");
+			s+="\n";
 		}
-		
+		return s;
 	}
 	
-	public void printLastLines(int n){
+	public String printLastLines(int n){
+		String s = ""; 
 		
-		if ( n > nb_lignes) n = nb_lignes;
+		if ( n >= nb_lignes) n = nb_lignes;
 		
 		n = nb_lignes - n;
 		
 		int M = maxStringSize();
 	
 		int nb_colonnes = colonnes.length;
-		System.out.print("\t\t");
+		s+= "\t\t";
 		
 		for (int i = 0; i < nb_colonnes; i++){
-			System.out.print(colonnes[i].getLabel());
-			for (int k = 0; k < M - colonnes[i].getLabel().length() + 3; k++) System.out.print(" ");
+			s += colonnes[i].getLabel();
+			for (int k = 0; k < M - colonnes[i].getLabel().length() + 3; k++) s+=" ";
 		}
-		System.out.println();
+		s+="\n";
 		for (int i = n; i < nb_lignes; i++){
-			System.out.print(i+"\t");
+			s += i+"\t";
 			for (int j = 0; j < nb_colonnes; j++){
-				System.out.print(colonnes[j].get(i));
-				for (int k = 0; k < M - colonnes[j].get(i).toString().length() + 3; k++) System.out.print(" ");
+				s += colonnes[j].get(i);
+				for (int k = 0; k < M - colonnes[j].get(i).toString().length() + 3; k++) s+=" ";
 			}
-			System.out.println("");
+			s+="\n";
 		}
-		
+		return s;
 	}
 	
 	private int isinLabels(Colonne[] labels, String test){
@@ -231,22 +239,18 @@ public class Dataframe {
 		return copie;
 	}
 	
-	public static void main(String[] args) throws DimensionError{
-		Dataframe d;
-		if(args.length == 0)
-			d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
-		else
-			d = new Dataframe(args[0]);
-		d.print();
-		System.out.println("\n\n");
-		try{
-			d.selectLabels("name", "n").print();
-		} catch(Exception ignored){}
-		System.out.println("\n\n");
-		try {
-			d.selectLignes(3,2).print();
-		} catch(Exception ignored){
-			System.out.println(ignored);
-		}
-	}
+	/*public static void main(String[] args) throws DimensionError{
+      Dataframe d;
+      if(args.length == 0)
+        d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
+      else
+        d = new Dataframe(args[0]);
+        System.out.println(d.print());
+      System.out.println("\n\n");
+      try {
+        d.selectLignes(3,2).print();
+      } catch(Exception ignored){
+        System.out.println(ignored);
+      } 
+    }*/
 }
