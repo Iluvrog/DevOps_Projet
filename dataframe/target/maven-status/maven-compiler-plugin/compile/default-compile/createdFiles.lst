@@ -1,4 +1,6 @@
+NotFuond.class
 IndexError.class
+NonNumberException.class
 Dataframe.class
 DimensionError.class
 Colonne.class

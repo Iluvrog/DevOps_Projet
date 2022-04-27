@@ -1,5 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+dataframe,default,NotFuond,4,3,0,0,2,2,1,1,1,1
+dataframe,default,NonNumberException,4,3,0,0,2,2,1,1,1,1
 dataframe,default,DimensionError,0,7,0,0,0,4,0,2,0,2
 dataframe,default,Colonne,0,50,0,2,0,12,0,6,0,5
-dataframe,default,Dataframe,596,424,52,50,75,89,36,31,6,10
+dataframe,default,Dataframe,555,737,52,84,67,127,36,51,5,14
 dataframe,default,IndexError,4,3,0,0,2,2,1,1,1,1
