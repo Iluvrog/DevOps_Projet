@@ -11,10 +11,11 @@ public class DataframeTest {
 	
 	//----------------------test constructeurs-------------------------
 	
-	@BeforeEach
-	void init() throws DimensionError{
+	@BeforeEach 
+	public void init() throws DimensionError{
 		data = new Dataframe( new String[]{"numero","nom", "poids"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"loup","chien","chat","poule","renard"} , (Object[]) new Double[]{17.1,45.5,87.6,45.6,13.8} );
 		data_csv = new Dataframe("csv/test2.csv");
+		System.out.println("ok");
 	}
 	
 	@Test
@@ -44,36 +45,18 @@ public class DataframeTest {
 			data = new Dataframe("csv/testErreurDim2.csv");
 	    });
 	}
-/*
+
 	//test simple sur les methodes
 	@Test
-	@DisplayName("get interger")
-	public void testBasique() {
-		//Dataframe d = new Dataframe(10);
-		//assertEquals( 10, d.valeur());
+	@DisplayName("nb de lignes :")
+	public void testnbdelignes() {
+		assertEquals( 5, data.nbLignes());
 	}
 	
 	@Test
-	//@Timeout(1)
-	@DisplayName("get interger")
-	public void testBasique() {
-		//Dataframe d = new Dataframe(10);
-		//assertEquals( 10, d.valeur());
+	@DisplayName("nb de colonnes :")
+	public void testnbdecolonnes() {
+		assertEquals( 3, data.nbColonnes());
 	}
 	
-	@Test
-	//@Timeout(1)
-	@DisplayName("get interger")
-	public void testBasique() {
-		//Dataframe d = new Dataframe(10);
-		//assertEquals( 10, d.valeur());
-	}
-	
-	@Test
-	//@Timeout(1)
-	@DisplayName("get interger")
-	public void testBasique() {
-		//Dataframe d = new Dataframe(10);
-		//assertEquals( 10, d.valeur());
-	}*/
 }
