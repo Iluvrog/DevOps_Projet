@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Dataframe {
 	
@@ -33,35 +31,51 @@ public class Dataframe {
 			String line = "";
 			String splitBy = ",";
 			int n = -1;
+			nb_lignes = countLinesOld(file) - 1;
+			int nbcolonnes = 0;
 			while ((line = br.readLine()) != null){
 				String[] str = line.split(splitBy);
 				if(n == -1){
 					String[] label = str;
-					colonnes = new Colonne[label.length];
-					if((line = br.readLine()) == null){
-						nb_lignes = 0;
-					}else{
-						str = line.split(splitBy);
-						nb_lignes = str.length;
-					}
-					for(int i = 0; i < label.length ; i++){
+					nbcolonnes = str.length;
+					colonnes = new Colonne[nbcolonnes];
+					for(int i = 0; i < nbcolonnes ; i++){
 						colonnes[i] = new Colonne(nb_lignes, label[i]);
-					}
+					}	
 					n = 0;
+				}else{
+					if(str.length != nbcolonnes)
+						throw new DimensionError();
+					for(int j = 0; j < nbcolonnes ; j++){
+						colonnes[j].add(n,type(str[j]));
+					}
+					n++;
 				}
-				if(n == 0)
-					nb_lignes = str.length;
-				else if(str.length != nb_lignes)
-					throw new DimensionError();
-				for(int j = 0; j < nb_lignes ; j++){
-					colonnes[j].add(n,type(str[j]));
-				}
-				n++;
 			}
-			nb_lignes = n;
 		}
 		catch(IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static int countLinesOld(String filename) throws IOException {
+		InputStream is = new BufferedInputStream(new FileInputStream(filename));
+		try {
+		byte[] c = new byte[1024];
+		int count = 0;
+		int readChars = 0;
+		boolean empty = true;
+		while ((readChars = is.read(c)) != -1) {
+		empty = false;
+		for (int i = 0; i < readChars; ++i) {
+		if (c[i] == '\n') {
+		++count;
+		}
+		}
+		}
+		return (count == 0 && !empty) ? 1 : count;
+		} finally {
+			is.close();
 		}
 	}
 	
@@ -206,7 +220,7 @@ public class Dataframe {
 		d.print();
 		System.out.println("\n\n");
 		try{
-			d.selectLabels("name").print();
+			//d.selectLabels("name", "ratio").print();
 		} catch(Exception ignored){}
 	}
 }
