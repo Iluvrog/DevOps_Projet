@@ -250,7 +250,7 @@ public class Dataframe {
 		return somme/nb;
 	}
 	
-	public static void main(String[] args) throws DimensionError{
+	public static void main(String[] args) throws DimensionError, IOException{
 		Dataframe d;
 		if(args.length == 0)
 			d = new Dataframe(new String[]{"n","name"} ,(Object[]) new Integer[]{12,15,14,13,1} ,(Object[]) new String[]{"a","c","agt","er","rtyu"});
@@ -265,8 +265,9 @@ public class Dataframe {
 		try {
 			d.selectLignes(3,2).print();
 		} catch(Exception ignored){}
+		System.out.println("\n\n");
 		try{
-			System.out.println("\n\n\nmoyenne test : " + d.moyenne("n"));
+			System.out.println("moyenne test : " + d.moyenne("n"));
 		}catch(Exception ignored){System.out.println(ignored);}
 	}
 	/*public static void main(String[] args) throws DimensionError{
